@@ -89,7 +89,7 @@ Role d6 para o POI. Com 5 ou 6, o hex tem 1 ponto de interesse.
 - Se o resultado é **menor ou igual**, a erva está contaminada.
 - Colha d4 doses.
 - Dose contaminada: ao beber, teste Tolerância DR 12. Falha: marca de fungo.
-- Dose contaminada também dá o efeito normal, e +1 Frio de volta (quente demais).
+- Dose contaminada ainda dá o efeito normal.
 
 ## 5. Encontro (d6)
 | d6 | Resultado |

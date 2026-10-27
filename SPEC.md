@@ -44,7 +44,7 @@
 ## Checklist
 - [x] Grilling de design
 - [x] Repositório criado
-- [ ] `04-viagem-solo.md` (rascunho 1)
+- [x] `04-viagem-solo.md` (rascunho 1)
 - [ ] `03-regras.md` mínimo
 - [ ] `02-personagem.md`
 - [ ] `01-mundo.md`

@@ -62,6 +62,12 @@ const vh = Math.round(R * 8) + 14;
 		<a class="jogar" href={`${base}/ferramentas/`}>Jogar</a>
 		<a class="ler" href={`${base}/viagem-solo/`}>Ler as regras</a>
 	</nav>
+	<figure class="gravura-fig">
+		<div class="gravura">
+			<img src={`${base}/arte/debret-gaucho.jpg`} alt="Gravura colorida de um gaúcho de capa vermelha e chapéu alto, ao lado de um cavalo claro, em campo aberto." width="965" height="1100" loading="lazy" decoding="async" />
+		</div>
+		<figcaption>Debret, <em>Gaúcho</em> (c. 1834–1839). Domínio público.</figcaption>
+	</figure>
 </section>
 
 <section class="regras-resumo">
@@ -118,6 +124,10 @@ const vh = Math.round(R * 8) + 14;
 	.ler { color: var(--mb-mate); }
 	.ler:active { background: var(--sl-color-accent-low); }
 	@media (min-width: 40rem) { .entradas { grid-template-columns: 1fr 1fr; } }
+
+	.gravura-fig { margin: 0 0 2.5rem; }
+	figcaption { font-family: var(--mb-type); color: var(--mb-dim); font-size: 0.9rem; margin-top: 0.75rem; }
+	figcaption em { font-style: normal; color: var(--mb-paper); }
 
 	.regras-resumo { padding-bottom: 4rem; }
 	.regras-resumo a {

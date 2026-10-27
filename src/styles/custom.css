@@ -65,3 +65,26 @@ body:has(.capa) #_top {
 	position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
 }
 body:has(.capa) .content-panel:first-child { display: none; }
+
+/* Gravura xerocada: tinta escura sobre papel verde, recorte irregular, uma falha de impressão ao entrar. */
+.gravura {
+	background: #b9d28f;
+	clip-path: polygon(0 3%, 6% 0, 31% 2%, 58% 0, 83% 2%, 100% 0, 99% 34%, 100% 66%, 98% 100%, 70% 98%, 41% 100%, 12% 98%, 0 100%, 2% 62%);
+	max-width: 28rem;
+	margin-inline: auto;
+}
+.gravura img {
+	display: block;
+	width: 100%;
+	height: auto;
+	filter: grayscale(1) contrast(1.9) brightness(1.02);
+	mix-blend-mode: multiply;
+	animation: falha 0.5s steps(2, end) 1;
+}
+@keyframes falha {
+	0%   { transform: translate(0); filter: grayscale(1) contrast(4) brightness(.7); }
+	30%  { transform: translate(-6px, 2px); }
+	60%  { transform: translate(5px, -1px); filter: grayscale(1) contrast(.6) brightness(1.3); }
+	100% { transform: translate(0); }
+}
+@media (prefers-reduced-motion: reduce) { .gravura img { animation: none; } }

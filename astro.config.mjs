@@ -13,7 +13,8 @@ export default defineConfig({
 			locales: { root: { label: 'Português', lang: 'pt-BR' } },
 			customCss: ['./src/styles/custom.css'],
 			head: [
-				{ tag: 'meta', attrs: { name: 'theme-color', content: '#0e1410' } },
+				{ tag: 'meta', attrs: { name: 'theme-color', content: '#0a0f0b' } },
+				{ tag: 'script', content: "localStorage.setItem('starlight-theme','dark');document.documentElement.dataset.theme='dark'" },
 				{ tag: 'meta', attrs: { name: 'apple-mobile-web-app-capable', content: 'yes' } },
 				{ tag: 'meta', attrs: { name: 'apple-mobile-web-app-title', content: 'Mate Borg' } },
 				{ tag: 'link', attrs: { rel: 'apple-touch-icon', href: '/mate-bork/apple-touch-icon.png' } },

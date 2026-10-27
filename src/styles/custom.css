@@ -1,19 +1,67 @@
+@import '@fontsource/pirata-one/400.css';
+@import '@fontsource/special-elite/400.css';
+
 :root {
+	--mb-bg: #0a0f0b;
+	--mb-raised: #111a13;
+	--mb-line: #2a3d2c;
+	--mb-paper: #d3e6b8;
+	--mb-dim: #9db586;
+	--mb-mate: #9ad13a;
+	--mb-rust: #c4552b;
+	--mb-display: 'Pirata One', 'Palatino Linotype', serif;
+	--mb-type: 'Special Elite', 'Courier New', monospace;
+
+	--sl-font: ui-sans-serif, system-ui, -apple-system, sans-serif;
 	--sl-font-system-mono: ui-monospace, 'SF Mono', Menlo, monospace;
-	--sl-color-accent-low: #1d2a1a;
-	--sl-color-accent: #6f8f3a;
-	--sl-color-accent-high: #b9d58a;
+	--sl-color-black: var(--mb-bg);
+	--sl-color-white: #eef7dc;
+	--sl-color-gray-1: #d3e6b8;
+	--sl-color-gray-2: #b6cc9c;
+	--sl-color-gray-3: #8ea876;
+	--sl-color-gray-4: #5d7358;
+	--sl-color-gray-5: #2f4231;
+	--sl-color-gray-6: #1a261c;
+	--sl-color-gray-7: #111a13;
+	--sl-color-accent-low: #1f3217;
+	--sl-color-accent: #6fa02a;
+	--sl-color-accent-high: var(--mb-mate);
+	--sl-color-bg: var(--mb-bg);
+	--sl-color-bg-nav: var(--mb-bg);
+	--sl-color-bg-sidebar: var(--mb-bg);
+	--sl-color-hairline: var(--mb-line);
+	--sl-color-hairline-light: var(--mb-line);
+	--sl-color-hairline-shade: #050805;
+	--sl-nav-height: 3.5rem;
 }
-:root[data-theme='light'] {
-	--sl-color-accent-low: #dfe8cf;
-	--sl-color-accent: #4a6a1f;
-	--sl-color-accent-high: #2c4210;
+
+/* Só tema escuro: o jogo acontece à noite e no frio. */
+starlight-theme-select { display: none; }
+
+h1, h2, h3, h4 {
+	font-family: var(--mb-display);
+	font-weight: 400;
+	letter-spacing: 0.01em;
 }
-h1, h2, h3 {
-	font-family: Impact, 'Arial Narrow Bold', sans-serif;
-	letter-spacing: 0.02em;
-	text-transform: uppercase;
+.sl-markdown-content h2 { font-size: 2rem; }
+.sl-markdown-content h3 { font-size: 1.5rem; color: var(--mb-mate); }
+.site-title { font-family: var(--mb-display); font-size: 1.6rem; }
+th { font-family: var(--mb-type); font-weight: 400; color: var(--mb-mate); }
+
+::selection { background: var(--mb-mate); color: var(--mb-bg); }
+:focus-visible { outline: 3px solid var(--mb-mate); outline-offset: 3px; }
+a { text-underline-offset: 0.2em; }
+html { scrollbar-color: var(--sl-color-gray-5) var(--mb-bg); }
+
+/* iPhone: áreas seguras e tabelas roláveis */
+body {
+	padding-left: env(safe-area-inset-left);
+	padding-right: env(safe-area-inset-right);
 }
-/* iPhone: safe areas e tabelas roláveis */
-body { padding-left: env(safe-area-inset-left); padding-right: env(safe-area-inset-right); }
 .sl-markdown-content table { display: block; overflow-x: auto; }
+
+/* Home: o título display da capa substitui o h1 da página, que continua para leitores de tela. */
+body:has(.capa) #_top {
+	position: absolute; width: 1px; height: 1px; overflow: hidden; clip-path: inset(50%); white-space: nowrap;
+}
+body:has(.capa) .content-panel:first-child { display: none; }

@@ -1,0 +1,131 @@
+---
+const base = import.meta.env.BASE_URL.replace(/\/$/, '');
+
+// Mapa de hexágonos: geometria pura. Hex "ponta-para-cima", 7 colunas x 5 linhas.
+const R = 34;
+const W = Math.sqrt(3) * R;
+const hexes: { cx: number; cy: number; kind: string; i: number }[] = [];
+const fungo = new Set(['1,3', '2,3', '2,2', '5,0']);
+const andado = new Set(['3,2', '3,3', '4,3', '4,2']);
+let i = 0;
+for (let row = 0; row < 5; row++) {
+	for (let col = 0; col < 7; col++) {
+		const cx = col * W + (row % 2 ? W / 2 : 0) + W;
+		const cy = row * R * 1.5 + R + 6;
+		const k = `${col},${row}`;
+		const kind = k === '4,2' ? 'voce' : fungo.has(k) ? 'fungo' : andado.has(k) ? 'andado' : 'vazio';
+		hexes.push({ cx, cy, kind, i: i++ });
+	}
+}
+const pts = (cx: number, cy: number) =>
+	Array.from({ length: 6 }, (_, n) => {
+		const a = (Math.PI / 180) * (60 * n - 30);
+		return `${(cx + R * Math.cos(a)).toFixed(1)},${(cy + R * Math.sin(a)).toFixed(1)}`;
+	}).join(' ');
+const vw = Math.round(W * 8) + 6;
+const vh = Math.round(R * 8) + 14;
+---
+
+<section class="capa">
+	<p class="titulo" aria-hidden="true">Mate Borg</p>
+	<p class="sub">RPG sombrio nos pampas. Hack de Mörk Borg.</p>
+
+	<svg class="mapa" viewBox={`-3 -3 ${vw} ${vh}`} aria-hidden="true">
+		{hexes.map((h) => (
+			<g class={`hex ${h.kind}`} style={`--i:${h.i}`}>
+				<polygon points={pts(h.cx, h.cy)} />
+				{h.kind === 'fungo' && (
+					<>
+						<circle cx={h.cx - 8} cy={h.cy + 4} r="3" />
+						<circle cx={h.cx + 7} cy={h.cy - 6} r="2" />
+						<circle cx={h.cx + 9} cy={h.cy + 9} r="2.5" />
+					</>
+				)}
+				{h.kind === 'voce' && <path d={`M${h.cx - 9},${h.cy - 9} L${h.cx + 9},${h.cy + 9} M${h.cx + 9},${h.cy - 9} L${h.cx - 9},${h.cy + 9}`} />}
+			</g>
+		))}
+	</svg>
+
+	<div class="gancho">
+		<p>
+			A erva morreu primeiro. Depois veio o frio. O minuano varre os pampas sem parar,
+			e não existe cuia cheia de estância em estância.
+		</p>
+		<p>
+			Um fungo pálido come a <em>ka'a</em> pela raiz. Quem bebe o que sobra ouve a terra
+			chamar. Gaúcho, você tem um cavalo, uma faca, uma garrucha e d4 doses de mate.
+			Cavalgue, ou fique e vire adubo.
+		</p>
+	</div>
+
+	<nav class="entradas" aria-label="Entrar">
+		<a class="jogar" href={`${base}/ferramentas/`}>Jogar</a>
+		<a class="ler" href={`${base}/viagem-solo/`}>Ler as regras</a>
+	</nav>
+</section>
+
+<section class="regras-resumo">
+	<a href={`${base}/viagem-solo/`}>
+		<h2>O fungo</h2>
+		<p>Um contador de 0 a 10. Quando ele chega ao fim, o mundo acaba.</p>
+	</a>
+	<a href={`${base}/viagem-solo/`}>
+		<h2>A dose</h2>
+		<p>Mate é sorte, cura e moeda. Cada cuia pode ser a última, ou estar podre.</p>
+	</a>
+	<a href={`${base}/viagem-solo/`}>
+		<h2>O cavalo</h2>
+		<p>Ele come capim e precisa de água. Se ele morrer, você anda.</p>
+	</a>
+</section>
+
+<style>
+	.capa, .regras-resumo { max-width: 40rem; margin-inline: auto; }
+	.capa { padding-block: 2rem 1rem; }
+	.titulo {
+		font-family: var(--mb-display);
+		font-size: clamp(3.75rem, 19vw, 6rem);
+		line-height: 0.95;
+		color: var(--mb-mate);
+		margin: 0;
+		text-wrap: balance;
+	}
+	.sub { font-family: var(--mb-type); color: var(--mb-dim); margin: 0.5rem 0 1.5rem; }
+	.mapa { width: 100%; height: auto; display: block; margin-bottom: 1.75rem; }
+	.hex polygon { fill: none; stroke: var(--mb-line); stroke-width: 1.5; }
+	.hex.andado polygon { fill: #14221a; stroke: #4a6a3c; }
+	.hex.fungo polygon { fill: #1c1410; stroke: var(--mb-rust); }
+	.hex.fungo circle { fill: var(--mb-rust); }
+	.hex.voce polygon { fill: var(--mb-mate); stroke: var(--mb-mate); }
+	.hex.voce path { stroke: var(--mb-bg); stroke-width: 3; fill: none; }
+	.hex { animation: surge 0.6s cubic-bezier(0.16, 1, 0.3, 1) both; animation-delay: calc(var(--i) * 25ms); }
+	@keyframes surge { from { opacity: 0; } }
+	@media (prefers-reduced-motion: reduce) { .hex { animation: none; } }
+
+	.gancho { font-family: var(--mb-type); font-size: 1.15rem; line-height: 1.65; max-width: 62ch; color: var(--mb-paper); }
+	.gancho p { margin: 0 0 1rem; }
+	.gancho em { color: var(--mb-mate); font-style: normal; }
+
+	.entradas { display: grid; gap: 0.75rem; margin: 1.75rem 0 2.5rem; }
+	.entradas a {
+		display: flex; align-items: center; justify-content: center;
+		min-height: 56px; padding: 0 1.25rem;
+		font-family: var(--mb-display); font-size: 1.75rem; text-decoration: none;
+		border: 2px solid var(--mb-mate); border-radius: 0.25rem;
+	}
+	.jogar { background: var(--mb-mate); color: var(--mb-bg); }
+	.jogar:active { background: var(--mb-paper); border-color: var(--mb-paper); }
+	.ler { color: var(--mb-mate); }
+	.ler:active { background: var(--sl-color-accent-low); }
+	@media (min-width: 40rem) { .entradas { grid-template-columns: 1fr 1fr; } }
+
+	.regras-resumo { padding-bottom: 4rem; }
+	.regras-resumo a {
+		display: block; text-decoration: none; color: inherit;
+		padding: 1.25rem 0; border-top: 1px solid var(--mb-line);
+	}
+	.regras-resumo a:last-child { border-bottom: 1px solid var(--mb-line); }
+	.regras-resumo h2 { font-size: 2.25rem; margin: 0; color: var(--mb-rust); line-height: 1; }
+	.regras-resumo p { margin: 0.4rem 0 0; color: var(--mb-paper); }
+	.regras-resumo a:active h2 { color: var(--mb-mate); }
+</style>

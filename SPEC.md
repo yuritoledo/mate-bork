@@ -37,7 +37,7 @@
 - 3–4 monstros grandes (Boitatá, Lobisomem). Tabela de ameaças menores (fungo-gente).
 
 ## Site
-- Fonte `.md`, um arquivo por módulo. Astro Starlight no GitHub Pages.
+- Fonte `.md` em `src/content/docs/`, um arquivo por módulo. Astro Starlight no GitHub Pages.
 - Visual próprio: verde-mate, preto, ferrugem, branco-geada.
 - v1: rolador do dia + oráculo em JS. Sem ficha digital (journaling em caderno).
 
@@ -50,5 +50,5 @@
 - [ ] `01-mundo.md`
 - [ ] `05-bestiario.md`
 - [ ] `06-tabelas.md`
-- [ ] Site Starlight + deploy
-- [ ] Rolador do dia + oráculo
+- [x] Site Starlight + deploy (workflow pronto; Pages ativado)
+- [x] Rolador do dia + oráculo (`src/components/Rolador.astro`)

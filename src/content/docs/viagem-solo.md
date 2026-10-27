@@ -1,4 +1,7 @@
-# Viagem Solo
+---
+title: Viagem Solo
+description: Roteiro do dia, oráculo e tabelas para jogar sozinho.
+---
 
 Jogue com 1 personagem e o cavalo. Use um caderno para anotar o diário.
 Cada dia de viagem é 1 hexágono. Siga o roteiro abaixo, na ordem.

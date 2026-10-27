@@ -1,0 +1,60 @@
+---
+---
+<div class="rolador">
+	<button data-roll="dia">Rolar o dia</button>
+	<button data-roll="oraculo">Oráculo (sim/não)</button>
+	<button data-roll="semente">Palavras-semente</button>
+	<ol id="rolador-saida" aria-live="polite"></ol>
+</div>
+
+<script>
+	const d = (n: number) => Math.floor(Math.random() * n) + 1;
+	const pick = <T,>(t: T[]) => t[d(t.length) - 1];
+
+	const clima = ['Minuano (Frio +2)', 'Geada (Frio +1)', 'Neblina (Frio +1, perde-se com 1–2)', 'Nublado (Frio 0)', 'Sol fraco (Frio 0)', 'Céu limpo (Frio -1)'];
+	const perigo = ['Fome', 'Água ruim', 'Rio cheio', 'Fogo de campo', 'Banhado', 'Esporos', 'Mate envenenado', 'Toca de tatu', 'Carrapatos', 'Roubo', 'Tempestade', 'Calmaria'];
+	const terreno = ['Coxilha', 'Campo limpo', 'Banhado', 'Capão de mato', 'Arroio', 'Ruína ou estância'];
+	const poi = ['Erva-mate', 'Galpão abandonado', 'Cruz de estrada, cheia de fungo', 'Acampamento de viajantes', 'Ruína de estância', 'Tekoha: povoado indígena'];
+	const ameaca = ['Fungo-gente, solitário', 'Bando de cães ferais', 'Salteadores', 'Soldado desertor', 'Cobra grande', 'Tropa de gado infectado'];
+	const evento = ['Viajante oferece troca', 'Hireling oferece serviço', 'Cavalo manhoso: novo traço', 'Visão: +1 Fungo', 'Achado: 1 item útil', 'Karaí ou Benzedeira cruza o caminho'];
+	const oraculo = ['Não, e…', 'Não', 'Não, mas…', 'Sim, mas…', 'Sim', 'Sim, e…'];
+	const acao = ['Esconder', 'Cobrar', 'Fugir', 'Trair', 'Curar', 'Roubar', 'Rezar', 'Caçar', 'Prometer', 'Chorar', 'Enterrar', 'Esperar'];
+	const tema = ["Erva (ka'a)", 'Cuia', 'Fogo (tata)', 'Água (y)', 'Terra (yvy)', 'Cavalo', 'Fungo', 'Estância', 'Minuano', "Mato (ka'aguy)", 'Tropilha', 'Galpão'];
+
+	const out = document.getElementById('rolador-saida')!;
+	const add = (txt: string) => {
+		const li = document.createElement('li');
+		li.textContent = txt;
+		out.prepend(li);
+	};
+
+	const rolls: Record<string, () => string> = {
+		dia: () => {
+			const enc = d(6);
+			const encTxt = enc <= 2 ? 'nada' : enc <= 4 ? `ameaça menor: ${pick(ameaca)}` : enc === 5 ? 'MONSTRO' : `evento: ${pick(evento)}`;
+			const rumo = d(6) === 1 ? 'PERDIDO' : 'ok';
+			return `Clima: ${pick(clima)} · Perigo: ${pick(perigo)} · Rumo: ${rumo} · Terreno: ${pick(terreno)} · POI: ${d(6) >= 5 ? pick(poi) : 'nenhum'} · Encontro: ${encTxt} · Fungo d6: ${d(6)} (6 = +1)`;
+		},
+		oraculo: () => pick(oraculo),
+		semente: () => `${pick(acao)} + ${pick(tema)}`,
+	};
+
+	document.querySelectorAll<HTMLButtonElement>('.rolador [data-roll]').forEach((b) =>
+		b.addEventListener('click', () => add(rolls[b.dataset.roll!]())),
+	);
+</script>
+
+<style>
+	.rolador { display: grid; gap: 0.75rem; }
+	button {
+		min-height: 48px; /* alvo de toque confortável no iPhone */
+		font-size: 1.1rem;
+		border: 1px solid var(--sl-color-accent);
+		background: var(--sl-color-accent-low);
+		color: var(--sl-color-white);
+		border-radius: 0.5rem;
+	}
+	button:active { background: var(--sl-color-accent); }
+	ol { padding-left: 1.25rem; }
+	li { margin-bottom: 0.5rem; }
+</style>

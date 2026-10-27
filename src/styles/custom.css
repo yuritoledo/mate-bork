@@ -12,7 +12,7 @@
 	--mb-display: 'Pirata One', 'Palatino Linotype', serif;
 	--mb-type: 'Special Elite', 'Courier New', monospace;
 
-	--sl-font: ui-sans-serif, system-ui, -apple-system, sans-serif;
+	--sl-font: var(--mb-type);
 	--sl-font-system-mono: ui-monospace, 'SF Mono', Menlo, monospace;
 	--sl-color-black: var(--mb-bg);
 	--sl-color-white: #eef7dc;
@@ -88,3 +88,27 @@ body:has(.capa) .content-panel:first-child { display: none; }
 	100% { transform: translate(0); }
 }
 @media (prefers-reduced-motion: reduce) { .gravura img { animation: none; } }
+
+/* UI: mesma gramática dos botões da home (cantos retos, borda mate, display nos rótulos). */
+site-search button[data-open-modal],
+starlight-menu-button button,
+.pagination-links a,
+.sl-markdown-content .sl-link-button,
+mobile-starlight-toc nav,
+starlight-toc summary {
+	border-radius: 0.25rem;
+}
+.pagination-links a { border: 2px solid var(--mb-line); }
+.pagination-links a:hover, .pagination-links a:active { border-color: var(--mb-mate); }
+.pagination-links .link-title { font-family: var(--mb-display); font-size: 1.5rem; }
+.sidebar-content a[aria-current='page'] { background: var(--mb-mate); color: var(--mb-bg); }
+.sl-markdown-content :not(pre) > code { font-family: var(--sl-font-system-mono); }
+.sl-markdown-content table { font-size: 0.95rem; }
+.sl-menu-button.sl-menu-button {
+	background: transparent;
+	border: 2px solid var(--mb-mate);
+	border-radius: 0.25rem;
+	color: var(--mb-mate);
+	box-shadow: none;
+}
+.sl-menu-button.sl-menu-button[aria-expanded='true'] { background: var(--mb-mate); color: var(--mb-bg); }

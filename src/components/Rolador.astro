@@ -47,14 +47,18 @@
 <style>
 	.rolador { display: grid; gap: 0.75rem; }
 	button {
-		min-height: 48px; /* alvo de toque confortável no iPhone */
-		font-size: 1.1rem;
-		border: 1px solid var(--sl-color-accent);
-		background: var(--sl-color-accent-low);
-		color: var(--sl-color-white);
-		border-radius: 0.5rem;
+		min-height: 56px; /* alvo de toque confortável no iPhone */
+		padding: 0 1.25rem;
+		font-family: var(--mb-display);
+		font-size: 1.75rem;
+		border: 2px solid var(--mb-mate);
+		border-radius: 0.25rem;
+		background: transparent;
+		color: var(--mb-mate);
 	}
-	button:active { background: var(--sl-color-accent); }
-	ol { padding-left: 1.25rem; }
-	li { margin-bottom: 0.5rem; }
+	button[data-roll='dia'] { background: var(--mb-mate); color: var(--mb-bg); }
+	button:active { background: var(--mb-paper); border-color: var(--mb-paper); color: var(--mb-bg); }
+	ol { list-style: none; padding: 0; margin: 1rem 0 0; }
+	li { padding: 1rem 0; border-top: 1px solid var(--mb-line); color: var(--mb-paper); line-height: 1.6; }
+	li:first-child { border-top: 2px solid var(--mb-mate); }
 </style>

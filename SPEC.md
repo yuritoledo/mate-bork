@@ -46,9 +46,9 @@
 - [x] Repositório criado
 - [x] `04-viagem-solo.md` (rascunho 1)
 - [x] `03-regras.md` (só o que difere do Mörk Borg; números a testar)
-- [ ] `02-personagem.md`
+- [x] `02-personagem.md` (8 classes, rascunho)
 - [ ] `01-mundo.md`
 - [ ] `05-bestiario.md`
-- [ ] `06-tabelas.md`
+- [x] `06-tabelas.md` (marcas, cavalo, marcos, preços)
 - [x] Site Starlight + deploy (workflow pronto; Pages ativado)
 - [x] Rolador do dia + oráculo (`src/components/Rolador.astro`)

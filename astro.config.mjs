@@ -22,7 +22,7 @@ export default defineConfig({
 			social: [{ icon: 'github', label: 'GitHub', href: 'https://github.com/yuritoledo/mate-bork' }],
 			sidebar: [
 				{ label: 'Ferramentas', items: [{ slug: 'ferramentas' }] },
-				{ label: 'Regras', items: [{ slug: 'viagem-solo' }] },
+				{ label: 'Regras', items: [{ slug: 'regras' }, { slug: 'viagem-solo' }] },
 			],
 		}),
 	],
